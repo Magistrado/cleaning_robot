@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMotionControl.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="MotionControl.cs" />
     <Compile Include="ProcessingControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

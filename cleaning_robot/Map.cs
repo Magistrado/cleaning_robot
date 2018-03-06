@@ -8,7 +8,7 @@ namespace CleaningRobot
 {
     public enum Map
     {
-        S, C, NULL
+        S, C, NULL, X
     }
 
     public enum Direction
@@ -19,16 +19,48 @@ namespace CleaningRobot
     public class OpMap
     {
         Map[,] map = null;
-        public uint XCoor { get; set; }
-        public uint YCoor { get; set; }
-        public Direction facing; 
+        uint x_coor = 0;
+        uint y_coor = 0;
+        Direction facing; 
+
+        public uint XCoord { get; }
+        public uint YCoord { get; }
 
         public Direction Direction { get { return facing; } }
 
         public OpMap(Map[,] map, Direction facing)
         {
             this.map = map;
-            facing = facing;
+            this.facing = facing;
+        }
+
+        public void advance()
+        {
+            if ( facing == Direction.N || facing == Direction.S )
+            {
+                x_coor += 1;
+            }
+            else
+            {
+                y_coor += 1;
+            }
+        }
+
+        public void clean()
+        {
+            map[y_coor, x_coor] = Map.X;
+        }
+
+        private void back(Direction t)
+        {
+            if ( facing == Direction.N || facing == Direction.S )
+            {
+                x_coor -= 1;
+            }
+            else
+            {
+                y_coor -= 1;
+            }
         }
 
         public void turnRight()
@@ -55,16 +87,16 @@ namespace CleaningRobot
             switch ( Direction )
             {
                 case Direction.N:
-                    Direction = Direction.W;
+                    facing = Direction.W;
                     break;
                 case Direction.W:
-                    Direction = Direction.S;
+                    facing = Direction.S;
                     break;
                 case Direction.S:
-                    Direction = Direction.E;
+                    facing = Direction.E;
                     break;
                 case Direction.E:
-                    Direction = Direction.N;
+                    facing = Direction.N;
                     break;
             }
         }

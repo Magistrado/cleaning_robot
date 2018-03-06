@@ -49,8 +49,7 @@ namespace CleaningRobot
         {
             if ( battery <= 0 )
                 throw new OutOfBatteryException();
-
-            
+            battery -= 1;
         }
 
         public void turnLeft()

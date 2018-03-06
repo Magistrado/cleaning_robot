@@ -42,29 +42,6 @@ namespace CleaningRobot
             this.motCtrl = motCtrl;
         }
 
-        private void advance(Direction t) 
-        {
-            if ( t == Direction.N || t == Direction.S )
-            {
-                map.XCoor += 1;
-            } else
-            {
-                map.YCoor += 1;
-            }
-        }
-
-        private void back(Direction t)
-        {
-            if ( t == Direction.N || t == Direction.S )
-            {
-                map.YCoor -= 1;
-            }
-            else
-            {
-                map.YCoor -= 1;
-            }
-        }
-
         public void execProgram()
         {
             foreach ( Command inst in cmds )
@@ -80,11 +57,9 @@ namespace CleaningRobot
                             motCtrl.turnRight();
                             break;
                         case Command.A:
-                            advance(motCtrl.Direction);
                             motCtrl.advance();
                             break;
                         case Command.B:
-                            back(motCtrl.Direction);
                             motCtrl.back();
                             break;
                         case Command.C:
