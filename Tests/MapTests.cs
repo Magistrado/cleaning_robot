@@ -122,5 +122,25 @@ namespace Tests
             map.clean();
             Assert.AreEqual(m[1,1], Map.X);
         }
+
+        [Test]
+        public void advance_toColumn_throwCannotComplain()
+        {
+            map = new OpMap(m, Direction.E, 1, 1);
+            Assert.Catch<CannotComplyException>(
+                () => map.advance());
+            Assert.AreEqual(map.XCoord, 1);
+            Assert.AreEqual(map.YCoord, 1);
+        }
+
+        [Test]
+        public void advance_toNull_throwCannotComplain()
+        {
+            map = new OpMap(m, Direction.S, 1, 2);
+            Assert.Catch<CannotComplyException>(
+                () => map.advance());
+            Assert.AreEqual(map.XCoord, 1);
+            Assert.AreEqual(map.YCoord, 2);
+        }
     }
 }

@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace CleaningRobot
 {
+    [Serializable]
+    public class CannotComplyException : Exception
+    {
+        public CannotComplyException() : base() { }
+    }
+
+            
+
     public enum Map
     {
         S, C, N, X
@@ -45,15 +53,35 @@ namespace CleaningRobot
             switch ( facing )
             {
                 case Direction.N:
+                    if ( map[ y_coor - 1, x_coor] == Map.N 
+                        || map[y_coor - 1, x_coor] == Map.C )
+                    {
+                        throw new CannotComplyException();
+                    }
                     y_coor -= 1;
                     break;
                 case Direction.W:
+                    if ( map[y_coor, x_coor -1] == Map.N
+                        || map[y_coor, x_coor -1] == Map.C )
+                    {
+                        throw new CannotComplyException();
+                    }
                     x_coor -= 1;
                     break;
                 case Direction.S:
+                    if ( map[y_coor + 1, x_coor] == Map.N
+                        || map[y_coor + 1, x_coor] == Map.C )
+                    {
+                        throw new CannotComplyException();
+                    }
                     y_coor += 1;
                     break;
                 case Direction.E:
+                    if ( map[y_coor, x_coor + 1] == Map.N
+                        || map[y_coor, x_coor + 1] == Map.C )
+                    {
+                        throw new CannotComplyException();
+                    }
                     x_coor += 1;
                     break;
             }
@@ -120,7 +148,6 @@ namespace CleaningRobot
                     break;
             }
         }
-
     }
 
 }

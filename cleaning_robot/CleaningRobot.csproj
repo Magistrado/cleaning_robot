@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backoff_strategies\IBackoffStrategy.cs" />
+    <Compile Include="Backoff_strategies\Strategy_1.cs" />
     <Compile Include="IMotionControl.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MotionControl.cs" />

@@ -9,7 +9,6 @@ namespace CleaningRobot
     public class MotionControl : IMotionControl
     {
         private int battery = 0;
-        private Direction facing = Direction.N;
 
         public MotionControl(int battery)
         {

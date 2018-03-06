@@ -5,9 +5,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CleaningRobot.Backoff_strategies;
 
 namespace Tests
 {
+    class WithStrategy_1 : ProcessingControl
+    {
+        public WithStrategy_1(IMotionControl motCtrl, OpMap m) : base(motCtrl,m) { }
+
+        protected override void fillBackOffStrategies()
+        {
+            this.bsLs.Add(new Strategy_1());
+        }
+    }
+
+
+
     [TestFixture]
     class ProcessingControlTests
     {
@@ -55,6 +68,33 @@ namespace Tests
             Assert.AreEqual(map.XCoord, 1);
             Assert.AreEqual(map.YCoord, 0);
         }
+
+        [Test]
+        public void execProgram_advanceToColumnBackoff_1_returnErrorFalse()
+        {
+            map = new OpMap(m, Direction.S, 1, 0);
+            proc = new WithStrategy_1(motCtrl, map);
+            Command[] cmds = new Command[] { Command.A };
+            proc.execProgram(cmds);
+            Assert.IsFalse(proc.Error);
+            Assert.AreEqual(map.Direction, Direction.S);
+            Assert.AreEqual(map.XCoord, 1);
+            Assert.AreEqual(map.YCoord, 1);
+        }
+
+        [Test]
+        public void execProgram_advanceToColumnBackoff_1_returnErrorFalse()
+        {
+            map = new OpMap(m, Direction.S, 1, 0);
+            proc = new WithStrategy_1(motCtrl, map);
+            Command[] cmds = new Command[] { Command.A };
+            proc.execProgram(cmds);
+            Assert.IsFalse(proc.Error);
+            Assert.AreEqual(map.Direction, Direction.S);
+            Assert.AreEqual(map.XCoord, 1);
+            Assert.AreEqual(map.YCoord, 1);
+        }
+
 
         //[Test]
         //public void execProgram_Test1ValidConditions_returnTrue()

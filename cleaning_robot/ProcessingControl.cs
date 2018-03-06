@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CleaningRobot.Backoff_strategies;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,10 +14,10 @@ namespace CleaningRobot
 
     public class ProcessingControl
     {
-
         IMotionControl motCtrl = null;
         OpMap map = null;
         bool error = false;
+        protected List<IBackoffStrategy> bsLs = null;
 
         public bool Error { get { return error; } }
 
@@ -34,6 +35,8 @@ namespace CleaningRobot
                 throw new ArgumentNullException("motCtrl");
 
             this.motCtrl = motCtrl;
+            bsLs = new List<IBackoffStrategy>();
+            fillBackOffStrategies();
         }
 
         public ProcessingControl(IMotionControl motCtrl, OpMap map)
@@ -43,7 +46,10 @@ namespace CleaningRobot
 
             this.motCtrl = motCtrl;
             this.map = map;
+            bsLs = new List<IBackoffStrategy>();
+            this.fillBackOffStrategies();
         }
+
 
         public void execProgram(Command[] cmds)
         {
@@ -75,6 +81,15 @@ namespace CleaningRobot
                             break;
                     }
                 }
+                catch ( CannotComplyException )
+                {
+                    execBackoff();
+                    if ( error )
+                    {
+                        // Execution finished
+                        return;
+                    }
+                }
                 catch ( NotEnoughBatteryException )
                 {
                     error = true;
@@ -88,6 +103,23 @@ namespace CleaningRobot
                     error = true;
                 }
             }  
+        }
+
+        protected virtual void fillBackOffStrategies()
+        {
+            bsLs.Add(new Strategy_1());
+        }
+
+        private void execBackoff()
+        {
+            foreach ( IBackoffStrategy bs in bsLs)
+            {
+                if ( bs.execStrategy(map, motCtrl) )
+                {
+                    error = false;
+                    return;
+                } 
+            }
         }
 
     }
