@@ -93,11 +93,11 @@ namespace CleaningRobot
                 }
                 catch ( NotEnoughBatteryException )
                 {
-                    error = true;
+                    return;
                 }
                 catch ( OutOfBatteryException )
                 {
-                    error = true;
+                    return;
                 }
                 catch ( Exception )
                 {
@@ -109,6 +109,10 @@ namespace CleaningRobot
         protected virtual void fillBackOffStrategies()
         {
             bsLs.Add(new Strategy_1());
+            bsLs.Add(new Strategy_2());
+            bsLs.Add(new Strategy_3());
+            bsLs.Add(new Strategy_4());
+            bsLs.Add(new Strategy_5());
         }
 
         private void execBackoff()
