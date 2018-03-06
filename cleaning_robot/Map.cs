@@ -8,7 +8,7 @@ namespace CleaningRobot
 {
     public enum Map
     {
-        S, C, NULL, X
+        S, C, N, X
     }
 
     public enum Direction
@@ -23,44 +23,60 @@ namespace CleaningRobot
         uint y_coor = 0;
         Direction facing; 
 
-        public uint XCoord { get; }
-        public uint YCoord { get; }
+        public uint XCoord { get { return x_coor; } }
+        public uint YCoord { get { return y_coor; } }
 
         public Direction Direction { get { return facing; } }
 
-        public OpMap(Map[,] map, Direction facing)
+        public OpMap(Map[,] map, Direction facing, uint x_ini, uint y_ini)
         {
             this.map = map;
             this.facing = facing;
+            x_coor = x_ini;
+            y_coor = y_ini;
         }
 
         public void advance()
         {
-            if ( facing == Direction.N || facing == Direction.S )
+            switch ( facing )
             {
-                x_coor += 1;
+                case Direction.N:
+                    y_coor -= 1;
+                    break;
+                case Direction.W:
+                    x_coor -= 1;
+                    break;
+                case Direction.S:
+                    y_coor += 1;
+                    break;
+                case Direction.E:
+                    x_coor += 1;
+                    break;
             }
-            else
+        }
+
+        public void back()
+        {
+            switch ( facing )
             {
-                y_coor += 1;
+                case Direction.N:
+                    y_coor += 1;
+                    break;
+                case Direction.W:
+                    x_coor += 1;
+                    break;
+                case Direction.S:
+                    y_coor -= 1;
+                    break;
+                case Direction.E:
+                    x_coor -= 1;
+                    break;
             }
         }
 
         public void clean()
         {
             map[y_coor, x_coor] = Map.X;
-        }
-
-        private void back(Direction t)
-        {
-            if ( facing == Direction.N || facing == Direction.S )
-            {
-                x_coor -= 1;
-            }
-            else
-            {
-                y_coor -= 1;
-            }
         }
 
         public void turnRight()

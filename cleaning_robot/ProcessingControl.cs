@@ -51,18 +51,23 @@ namespace CleaningRobot
                     switch ( inst )
                     {
                         case Command.TL:
+                            map.turnLeft();
                             motCtrl.turnLeft();
                             break;
                         case Command.TR:
+                            map.turnRight();
                             motCtrl.turnRight();
                             break;
                         case Command.A:
+                            map.advance();
                             motCtrl.advance();
                             break;
                         case Command.B:
+                            map.back();
                             motCtrl.back();
                             break;
                         case Command.C:
+                            map.clean();
                             motCtrl.clean();
                             break;
                     }
