@@ -51,6 +51,7 @@
     <Compile Include="Backoff_strategies\Strategy_4.cs" />
     <Compile Include="Backoff_strategies\Strategy_5.cs" />
     <Compile Include="IMotionControl.cs" />
+    <Compile Include="InputData.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MotionControl.cs" />
     <Compile Include="ProcessingControl.cs" />

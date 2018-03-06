@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,6 +92,12 @@ namespace CleaningRobot
         public string outputToJSON()
         {
             return JsonConvert.SerializeObject(this);
+        }
+
+        public string outputToPrettyJSON()
+        {
+            string json = JsonConvert.SerializeObject(this);
+            return JValue.Parse(json).ToString(Formatting.Indented);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Tests
                 {Map.S, Map.S, Map.S, Map.S},
                 {Map.S, Map.S, Map.C, Map.S},
                 {Map.S, Map.S, Map.S, Map.S},
-                {Map.S, Map.N, Map.S, Map.S},
+                {Map.S, Map.Null, Map.S, Map.S},
             };
         }
 

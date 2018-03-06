@@ -79,7 +79,7 @@ namespace Tests
                 {Map.S, Map.S, Map.S, Map.S},
                 {Map.S, Map.S, Map.C, Map.S},
                 {Map.S, Map.S, Map.S, Map.S},
-                {Map.S, Map.N, Map.S, Map.S},
+                {Map.S, Map.Null, Map.S, Map.S},
             };
             map = new OpMap(m, Direction.N, 3, 0);
             motCtrl = new MotionControl(10);
@@ -167,7 +167,7 @@ namespace Tests
         [Test]
         public void execProgram_advanceToNullBackoff5_returnErrorFalse()
         {
-            m[3, 3] = Map.N;
+            m[3, 3] = Map.Null;
             map = new OpMap(m, Direction.S, 3, 2);
             proc = new WithStrategy_5(motCtrl, map);
             Command[] cmds = new Command[] { Command.A };
