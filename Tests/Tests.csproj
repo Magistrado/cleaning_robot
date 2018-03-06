@@ -61,6 +61,7 @@
     <Compile Include="MotionControlTests.cs" />
     <Compile Include="ProcessingControlTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

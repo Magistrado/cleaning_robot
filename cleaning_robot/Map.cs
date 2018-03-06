@@ -12,7 +12,6 @@ namespace CleaningRobot
         public CannotComplyException() : base() { }
     }
 
-            
 
     public enum Map
     {
@@ -24,19 +23,32 @@ namespace CleaningRobot
         N, W, S, E
     }
 
+    public struct Cell
+    {
+        public uint X;
+        public uint Y;
+
+        public Cell(uint x_coord, uint y_coord)
+        {
+            this.X = x_coord;
+            this.Y = y_coord;
+        }
+    }
+
     public class OpMap
     {
         Map[,] map = null;
         uint x_coor = 0;
         uint y_coor = 0;
         Direction facing;
-        uint visitedCells= 0;
-        uint cleanedCells = 0;
+
+        List<Cell> visitedCells = null;
+        List<Cell> cleanedCells = null;
 
         public uint XCoord { get { return x_coor; } }
         public uint YCoord { get { return y_coor; } }
-        public uint VisitedCells { get { return visitedCells; } }
-        public uint CleanedCells { get { return cleanedCells; } }
+        public List<Cell> VisitedCells { get { return visitedCells; } }
+        public List<Cell> CleanedCells { get { return cleanedCells; } }
 
         public Direction Direction { get { return facing; } }
 
@@ -46,6 +58,8 @@ namespace CleaningRobot
             this.facing = facing;
             x_coor = x_ini;
             y_coor = y_ini;
+            visitedCells = new List<Cell>();
+            cleanedCells = new List<Cell>();
         }
 
         public void advance()
@@ -85,6 +99,7 @@ namespace CleaningRobot
                     x_coor += 1;
                     break;
             }
+            visitedCells.Add(new Cell(y_coor, x_coor));
         }
 
         public void back()
@@ -104,11 +119,13 @@ namespace CleaningRobot
                     x_coor -= 1;
                     break;
             }
+            visitedCells.Add(new Cell(y_coor, x_coor));
         }
 
         public void clean()
         {
-            map[y_coor, x_coor] = Map.X;
+            //map[y_coor, x_coor] = Map.X;
+            cleanedCells.Add(new Cell(y_coor, x_coor));
         }
 
         public void turnRight()

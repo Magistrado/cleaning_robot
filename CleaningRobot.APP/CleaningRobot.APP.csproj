@@ -48,6 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\cleaning_robot\CleaningRobot.csproj">
+      <Project>{1cfabe01-60b9-41b9-b7e6-9ae36d0bf645}</Project>
+      <Name>CleaningRobot</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

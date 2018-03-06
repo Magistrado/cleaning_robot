@@ -116,14 +116,6 @@ namespace Tests
         }
 
         [Test]
-        public void clean_MarkX_returnsWest()
-        {
-            map = new OpMap(m, Direction.N, 1, 1);
-            map.clean();
-            Assert.AreEqual(m[1,1], Map.X);
-        }
-
-        [Test]
         public void advance_toColumn_throwCannotComplain()
         {
             map = new OpMap(m, Direction.E, 1, 1);

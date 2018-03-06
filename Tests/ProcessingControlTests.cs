@@ -178,8 +178,6 @@ namespace Tests
             Assert.AreEqual(map.YCoord, 0);
         }
 
-
-
         /*
         [Test]
         public void execProgram_advanceToNullBackoff12345_returnErrorTrue()
@@ -198,7 +196,6 @@ namespace Tests
         [Test]
         public void execProgram_Test1ValidConditions_returnTrue()
         {
-
             map = new OpMap(m, Direction.N, 3, 0);
             motCtrl = new MotionControl(80);
 
