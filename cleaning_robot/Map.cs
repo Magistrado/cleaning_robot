@@ -21,10 +21,14 @@ namespace CleaningRobot
         Map[,] map = null;
         uint x_coor = 0;
         uint y_coor = 0;
-        Direction facing; 
+        Direction facing;
+        uint visitedCells= 0;
+        uint cleanedCells = 0;
 
         public uint XCoord { get { return x_coor; } }
         public uint YCoord { get { return y_coor; } }
+        public uint VisitedCells { get { return visitedCells; } }
+        public uint CleanedCells { get { return cleanedCells; } }
 
         public Direction Direction { get { return facing; } }
 

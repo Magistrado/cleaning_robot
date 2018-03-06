@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="MapTests.cs" />
     <Compile Include="MotionControlTests.cs" />
+    <Compile Include="ProcessingControlTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

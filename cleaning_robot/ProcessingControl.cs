@@ -6,25 +6,19 @@ using System.Threading.Tasks;
 
 namespace CleaningRobot
 {
-    enum Command
+    public enum Command
     {
         TL, TR, A, B, C
     }
 
-    class ProcessingControl
+    public class ProcessingControl
     {
-        Command[] cmds = null;
+
         IMotionControl motCtrl = null;
         OpMap map = null;
         bool error = false;
 
-        public Command[] LoadCommands
-        {
-            set
-            {
-                cmds = value;
-            }
-        }
+        public bool Error { get { return error; } }
 
         public OpMap LoadMap
         {
@@ -42,7 +36,16 @@ namespace CleaningRobot
             this.motCtrl = motCtrl;
         }
 
-        public void execProgram()
+        public ProcessingControl(IMotionControl motCtrl, OpMap map)
+        {
+            if ( motCtrl == null )
+                throw new ArgumentNullException("motCtrl");
+
+            this.motCtrl = motCtrl;
+            this.map = map;
+        }
+
+        public void execProgram(Command[] cmds)
         {
             foreach ( Command inst in cmds )
             {
