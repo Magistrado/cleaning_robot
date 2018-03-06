@@ -89,5 +89,37 @@ namespace Tests
             Assert.Catch<OutOfBatteryException>(
                 () => procNoBat.clean());
         }
+
+        [Test]
+        public void clean_battery4_throwNotEnoughBattery()
+        {
+            IMotionControl procNoBat = new MotionControl(4);
+            Assert.Catch<NotEnoughBatteryException>(
+                () => procNoBat.clean());
+        }
+
+        [Test]
+        public void clean_battery0_throwNotEnoughBattery()
+        {
+            IMotionControl procNoBat = new MotionControl(1);
+            Assert.Catch<NotEnoughBatteryException>(
+                () => procNoBat.clean());
+        }
+
+        [Test]
+        public void advance_battery1_throwNotEnoughBattery()
+        {
+            IMotionControl procNoBat = new MotionControl(0);
+            Assert.Catch<NotEnoughBatteryException>(
+                () => procNoBat.advance());
+        }
+
+        [Test]
+        public void back_battery0_throwNotEnoughBattery()
+        {
+            IMotionControl procNoBat = new MotionControl(2);
+            Assert.Catch<NotEnoughBatteryException>(
+                () => procNoBat.back());
+        }
     }
 }

@@ -8,15 +8,15 @@ namespace CleaningRobot
 {
     public class MotionControl : IMotionControl
     {
-        private uint battery = 0;
+        private int battery = 0;
         private Direction facing = Direction.N;
 
-        public MotionControl(uint battery)
+        public MotionControl(int battery)
         {
             this.battery = battery;
         }
 
-        public uint Battery
+        public int Battery
         {
             get
             {
@@ -26,36 +26,56 @@ namespace CleaningRobot
 
         public void advance()
         {
+            if ( ( battery - 2 ) < 0 )
+                throw new NotEnoughBatteryException();
+
             if ( battery <= 0 )
                 throw new OutOfBatteryException();
+                                                      
             battery -= 2;
         }
 
         public void back()
         {
+            if ( ( battery - 3 ) < 0 )
+                throw new NotEnoughBatteryException();
+
             if ( battery <= 0 )
-                throw new OutOfBatteryException();
+                throw new OutOfBatteryException();    
+
             battery -= 3;
         }
 
         public void clean()
         {
+            if ( ( battery - 5 ) < 0 )
+                throw new NotEnoughBatteryException();
+
             if ( battery <= 0 )
                 throw new OutOfBatteryException();
+
             battery -= 5;
         }
 
         public void turnRight()
         {
+            if ( ( battery - 1 ) < 0 )
+                throw new NotEnoughBatteryException();
+
             if ( battery <= 0 )
                 throw new OutOfBatteryException();
+
             battery -= 1;
         }
 
         public void turnLeft()
         {
+            if ( ( battery - 1 ) < 0 )
+                throw new NotEnoughBatteryException();
+
             if ( battery <= 0 )
                 throw new OutOfBatteryException();
+
             battery -= 1;
         }
     }

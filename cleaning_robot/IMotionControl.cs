@@ -12,9 +12,15 @@ namespace CleaningRobot
         public OutOfBatteryException() : base() { }
     }
 
+    [Serializable]
+    public class NotEnoughBatteryException : Exception
+    {
+        public NotEnoughBatteryException() : base() { }
+    }
+
     public interface IMotionControl
     {
-        uint Battery { get; }
+        int Battery { get; }
 
         void advance();
 

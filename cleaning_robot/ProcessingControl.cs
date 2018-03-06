@@ -75,6 +75,10 @@ namespace CleaningRobot
                             break;
                     }
                 }
+                catch ( NotEnoughBatteryException )
+                {
+                    error = true;
+                }
                 catch ( OutOfBatteryException )
                 {
                     error = true;
