@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CleaningRobot;
 
 namespace CleaningRobot.Backoff_strategies
 {
-    public class Strategy_1 : IBackoffStrategy
+    public class Strategy_2 : IBackoffStrategy
     {
+        // (TL, B, TR, A)
         public bool execStrategy(OpMap m, IMotionControl mc)
         {
             try
             {
+                m.turnLeft();
+                mc.turnLeft();
+
+                m.back();
+                mc.back();
+
                 m.turnRight();
                 mc.turnRight();
 
@@ -39,3 +45,4 @@ namespace CleaningRobot.Backoff_strategies
         }
     }
 }
+

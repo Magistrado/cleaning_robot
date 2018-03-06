@@ -19,6 +19,16 @@ namespace Tests
         }
     }
 
+    class WithStrategy_2 : ProcessingControl
+    {
+        public WithStrategy_2(IMotionControl motCtrl, OpMap m) : base(motCtrl, m) { }
+
+        protected override void fillBackOffStrategies()
+        {
+            this.bsLs.Add(new Strategy_2());
+        }
+    }
+
 
 
     [TestFixture]
@@ -70,29 +80,29 @@ namespace Tests
         }
 
         [Test]
-        public void execProgram_advanceToColumnBackoff_1_returnErrorFalse()
+        public void execProgram_advanceToColumnBackoff1_returnErrorFalse()
         {
-            map = new OpMap(m, Direction.S, 1, 0);
+            map = new OpMap(m, Direction.S, 2, 0);
             proc = new WithStrategy_1(motCtrl, map);
             Command[] cmds = new Command[] { Command.A };
             proc.execProgram(cmds);
             Assert.IsFalse(proc.Error);
-            Assert.AreEqual(map.Direction, Direction.S);
-            Assert.AreEqual(map.XCoord, 1);
-            Assert.AreEqual(map.YCoord, 1);
+            Assert.AreEqual(map.Direction, Direction.W);
+            Assert.AreEqual(map.XCoord, 0);
+            Assert.AreEqual(map.YCoord, 0);
         }
 
         [Test]
-        public void execProgram_advanceToColumnBackoff_1_returnErrorFalse()
+        public void execProgram_advanceToColumnBackoff2_returnErrorFalse()
         {
-            map = new OpMap(m, Direction.S, 1, 0);
-            proc = new WithStrategy_1(motCtrl, map);
+            map = new OpMap(m, Direction.N, 2, 2);
+            proc = new WithStrategy_2(motCtrl, map);
             Command[] cmds = new Command[] { Command.A };
             proc.execProgram(cmds);
             Assert.IsFalse(proc.Error);
-            Assert.AreEqual(map.Direction, Direction.S);
-            Assert.AreEqual(map.XCoord, 1);
-            Assert.AreEqual(map.YCoord, 1);
+            Assert.AreEqual(map.Direction, Direction.N);
+            Assert.AreEqual(map.XCoord, 3);
+            Assert.AreEqual(map.YCoord, 0);
         }
 
 

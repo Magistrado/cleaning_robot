@@ -53,11 +53,11 @@ namespace CleaningRobot
 
         public void execProgram(Command[] cmds)
         {
-            foreach ( Command inst in cmds )
+            for ( int i = 0 ; i < cmds.Length ; i += 1 )
             {
                 try
                 {
-                    switch ( inst )
+                    switch ( cmds[i] )
                     {
                         case Command.TL:
                             map.turnLeft();
@@ -86,9 +86,10 @@ namespace CleaningRobot
                     execBackoff();
                     if ( error )
                     {
-                        // Execution finished
+                        // All backoff strategies had failed. Execution finished
                         return;
                     }
+                    i -= 1;
                 }
                 catch ( NotEnoughBatteryException )
                 {
