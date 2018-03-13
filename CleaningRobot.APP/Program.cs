@@ -97,8 +97,12 @@ namespace CleaningRobot.APP
 
             // Execute robot
             pc.execProgram(id.commands);
-           
 
+
+            // Write output to disk
+            Stats stats = pc.getStats();
+            txtHandler.Content = stats.outputToPrettyJSON();
+            txtHandler.write(args[1]);    
         }
     }
 }

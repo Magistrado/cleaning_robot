@@ -127,5 +127,10 @@ namespace CleaningRobot
             }
         }
 
+        public Stats getStats()
+        {
+            return new Stats(map.VisitedCells, map.CleanedCells, motCtrl.Battery, map.Direction, map.XCoord, map.YCoord);
+        }
+
     }
 }

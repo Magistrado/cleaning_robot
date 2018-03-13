@@ -10,11 +10,11 @@ namespace CleaningRobot
 {
     public struct PositionFacing
     {
-        public uint X;
-        public uint Y;
+        public int X;
+        public int Y;
         public Direction facing;
 
-        public PositionFacing(uint x_lastPos, uint y_lastPos, Direction dir)
+        public PositionFacing(int x_lastPos, int y_lastPos, Direction dir)
         {
             X = x_lastPos;
             Y = y_lastPos;
@@ -26,7 +26,7 @@ namespace CleaningRobot
     {
         Cell[] _visited = null;
         Cell[] _cleaned = null;
-        uint _battery = 0;
+        int _battery = 0;
         PositionFacing _lastPos;
 
         public Cell[] visited
@@ -55,7 +55,7 @@ namespace CleaningRobot
             }
         }
 
-        public uint battery
+        public int battery
         {
             get
             {
@@ -81,7 +81,7 @@ namespace CleaningRobot
             }
         }
 
-        public Stats(List<Cell> visitedCells, List<Cell> cleanedCells, uint battery, Direction dir, uint x_lastPos, uint y_lastPos)
+        public Stats(List<Cell> visitedCells, List<Cell> cleanedCells, int battery, Direction dir, int x_lastPos, int y_lastPos)
         {
             this._visited = visitedCells.ToArray();
             this._cleaned = cleanedCells.ToArray();

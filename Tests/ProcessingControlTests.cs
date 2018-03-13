@@ -60,8 +60,6 @@ namespace Tests
         }
     }
 
-
-
     [TestFixture]
     class ProcessingControlTests
     {
@@ -194,7 +192,7 @@ namespace Tests
         }    */
 
         [Test]
-        public void execProgram_Test1ValidConditions_returnTrue()
+        public void execProgram_Test1_returnResult()
         {
             map = new OpMap(m, Direction.N, 3, 0);
             motCtrl = new MotionControl(80);
@@ -204,10 +202,37 @@ namespace Tests
             Command[] cmds = new Command[] { Command.TL, Command.A, Command.C, Command.A, Command.C, Command.TR, Command.A, Command.C };
 
             proc.execProgram(cmds);
-            Assert.AreEqual(54, motCtrl.Battery);
             Assert.AreEqual(Direction.E, map.Direction);
+            Assert.AreEqual(54, motCtrl.Battery);
             Assert.AreEqual(2, map.XCoord);
             Assert.AreEqual(0, map.YCoord);
+        }
+
+
+        [Test]
+        public void execProgram_Test2_returnResult()
+        {
+            // Test_1
+            m = new Map[,]
+            {
+                {Map.S, Map.S, Map.S, Map.S},
+                {Map.S, Map.S, Map.C, Map.S},
+                {Map.S, Map.S, Map.S, Map.S},
+                {Map.S, Map.Null, Map.S, Map.S},
+            };       
+
+            map = new OpMap(m, Direction.S, 3, 1);
+            motCtrl = new MotionControl(1094);
+
+            proc = new ProcessingControl(motCtrl);
+            proc.LoadMap = map;
+            Command[] cmds = new Command[] { Command.TR, Command.A, Command.C, Command.A, Command.C, Command.TR, Command.A, Command.C };
+
+            proc.execProgram(cmds);
+            Assert.AreEqual(Direction.E, map.Direction);
+            Assert.AreEqual(1040, motCtrl.Battery);
+            Assert.AreEqual(3, map.XCoord);
+            Assert.AreEqual(2, map.YCoord);
         }
     }
 }
